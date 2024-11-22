@@ -19,6 +19,7 @@ const Scheduler = ({
   onFilterData,
   onClearFilterData,
   onItemClick,
+  onRowClick,
   isLoading
 }: SchedulerProps) => {
   const appConfig: Config = useMemo(
@@ -89,6 +90,7 @@ const Scheduler = ({
                   onTileClick={onTileClick}
                   topBarWidth={topBarWidth ?? 0}
                   onItemClick={onItemClick}
+                  onRowClick={onRowClick}
                   toggleTheme={toggleTheme}
                 />
               </StyledInnerWrapper>

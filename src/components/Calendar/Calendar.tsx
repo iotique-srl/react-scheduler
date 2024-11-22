@@ -22,6 +22,7 @@ const initialTooltipData: TooltipData = {
 export const Calendar: FC<CalendarProps> = ({
   data,
   onTileClick,
+  onRowClick,
   onItemClick,
   toggleTheme,
   topBarWidth
@@ -104,14 +105,34 @@ export const Calendar: FC<CalendarProps> = ({
   useEffect(() => {
     const handleMouseOver = (e: MouseEvent) =>
       debouncedHandleMouseOver.current(e, startDate, rowsPerItem, projectsPerPerson, zoom);
+    const handleClick = (e: MouseEvent) => {
+      if (!gridRef.current) return;
+
+      const { left, top } = gridRef.current.getBoundingClientRect();
+      const tooltipCoords = { x: e.clientX - left, y: e.clientY - top };
+
+      const { focusedDate } = getTooltipData(
+        startDate,
+        tooltipCoords,
+        rowsPerItem,
+        projectsPerPerson,
+        zoom,
+        includeTakenHoursOnWeekendsInDayView
+      );
+
+      onRowClick?.(focusedDate.toDate());
+    };
+
     const gridArea = gridRef.current;
 
     if (!gridArea) return;
 
+    gridArea.addEventListener("click", handleClick);
     gridArea.addEventListener("mousemove", handleMouseOver);
     gridArea.addEventListener("mouseleave", handleMouseLeave);
 
     return () => {
+      gridArea.removeEventListener("click", handleClick);
       gridArea.removeEventListener("mousemove", handleMouseOver);
       gridArea.removeEventListener("mouseleave", handleMouseLeave);
     };

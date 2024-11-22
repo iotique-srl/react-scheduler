@@ -10,7 +10,7 @@ import { GridProps } from "./types";
 import { StyledCanvas, StyledInnerWrapper, StyledSpan, StyledWrapper } from "./styles";
 
 const Grid = forwardRef<HTMLDivElement, GridProps>(function Grid(
-  { zoom, rows, data, onTileClick },
+  { zoom, rows, data, onTileClick, onRowClick },
   ref
 ) {
   const { handleScrollNext, handleScrollPrev, date, isLoading, cols, startDate } = useCalendar();

@@ -1,4 +1,4 @@
-import dayjs from "dayjs";
+import dayjs, { Dayjs } from "dayjs";
 import { weekWidth, boxHeight, dayWidth, zoom2ColumnWidth } from "@/constants";
 import { Day, Coords, SchedulerProjectData, TooltipData, ZoomLevel } from "@/types/global";
 import { getOccupancy } from "./getOccupancy";
@@ -10,7 +10,9 @@ export const getTooltipData = (
   resourcesData: SchedulerProjectData[][][],
   zoom: ZoomLevel,
   includeTakenHoursOnWeekendsInDayView = false
-): TooltipData => {
+): TooltipData & {
+  focusedDate: Dayjs;
+} => {
   let timeUnit: dayjs.ManipulateType = "weeks";
   let currBoxWidth;
   switch (zoom) {
@@ -50,5 +52,5 @@ export const getTooltipData = (
     zoom,
     includeTakenHoursOnWeekendsInDayView
   );
-  return { coords: { x: xPos, y: yPos }, resourceIndex, disposition };
+  return { coords: { x: xPos, y: yPos }, resourceIndex, disposition, focusedDate };
 };

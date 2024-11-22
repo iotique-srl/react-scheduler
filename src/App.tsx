@@ -68,6 +68,7 @@ function App() {
           onFilterData={handleFilterData}
           config={{ zoom: 0, maxRecordsPerPage: maxRecordsPerPage, showThemeToggle: true }}
           onItemClick={(data) => console.log("clicked: ", data)}
+          onRowClick={(data) => console.log("clicked: ", data)}
         />
       ) : (
         <StyledSchedulerFrame>
@@ -79,6 +80,7 @@ function App() {
             onTileClick={handleTileClick}
             onFilterData={handleFilterData}
             onItemClick={(data) => console.log("clicked: ", data)}
+            onRowClick={(data) => console.log("clicked: ", data)}
           />
         </StyledSchedulerFrame>
       )}
