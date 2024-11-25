@@ -16,6 +16,16 @@ import { drawRow } from "../../drawRow";
 import { getBoxFillStyle } from "../../getBoxFillStyle";
 import { getTextStyle } from "../../getTextStyle";
 
+const localizedDays = {
+  Mon: "Lun",
+  Tue: "Mar",
+  Wed: "Mer",
+  Thu: "Gio",
+  Fri: "Ven",
+  Sat: "Sab",
+  Sun: "Dom"
+};
+
 export const drawDaysOnBottom = (
   ctx: CanvasRenderingContext2D,
   cols: number,
@@ -48,7 +58,7 @@ export const drawDaysOnBottom = (
         ),
         topText: {
           y: dayNameYPos,
-          label: day.dayName.toUpperCase(),
+          label: localizedDays[day.dayName as keyof typeof localizedDays].toUpperCase(),
           font: fonts.bottomRow.name,
           color: getTextStyle(
             { isCurrent: day.isCurrentDay, isBusinessDay: day.isBusinessDay },
