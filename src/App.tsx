@@ -68,7 +68,7 @@ function App() {
           onFilterData={handleFilterData}
           config={{ zoom: 0, maxRecordsPerPage: maxRecordsPerPage, showThemeToggle: true }}
           onItemClick={(data) => console.log("clicked: ", data)}
-          onRowClick={(data) => console.log("clicked: ", data)}
+          onRowClick={(data, index) => console.log("clicked: ", data, index)}
         />
       ) : (
         <StyledSchedulerFrame>

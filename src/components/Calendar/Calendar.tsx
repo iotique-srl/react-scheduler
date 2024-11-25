@@ -111,7 +111,7 @@ export const Calendar: FC<CalendarProps> = ({
       const { left, top } = gridRef.current.getBoundingClientRect();
       const tooltipCoords = { x: e.clientX - left, y: e.clientY - top };
 
-      const { focusedDate } = getTooltipData(
+      const { focusedDate, resourceIndex } = getTooltipData(
         startDate,
         tooltipCoords,
         rowsPerItem,
@@ -120,7 +120,7 @@ export const Calendar: FC<CalendarProps> = ({
         includeTakenHoursOnWeekendsInDayView
       );
 
-      onRowClick?.(focusedDate.toDate());
+      onRowClick?.(focusedDate.toDate(), resourceIndex);
     };
 
     const gridArea = gridRef.current;
